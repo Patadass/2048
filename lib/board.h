@@ -14,16 +14,18 @@
 #define DIR_DOWN 2
 #define DIR_LEFT 3
 
-struct game_board{
-private:
-    unsigned int board[BOARD_HEIGHT][BOARD_WIDTH];
-
-    const short directions[4][2] = {
+const short directions[4][2] = {
         {-1, 0},
         {0, 1},
         {1, 0},
         {0, -1}
-    };
+};
+
+struct game_board{
+private:
+    unsigned int board[BOARD_HEIGHT][BOARD_WIDTH];
+
+    
 
 public:
     game_board(){
@@ -90,7 +92,7 @@ public:
         if(all_set()){
             return;
         }
-        srand(time({})); //set seed from current time
+        srand(time(nullptr)); //set seed from current time
         unsigned int i = random_int(BOARD_HEIGHT);
         unsigned int j = random_int(BOARD_WIDTH);
         //TODO
@@ -107,56 +109,147 @@ public:
         return rand() % to;
     }
 
-    //TODO
-    //bad
-    bool has_movable(short h, short v){
+    //check if any i, j can move in direction i + h, j + v
+    bool has_move(short h, short v){
         for(size_t i = 0;i < BOARD_HEIGHT;i++){
-            for(size_t j = 0;j< BOARD_WIDTH;j++){
-                if(is_ofb(i + h, j + v)){
+            for(size_t j = 0;j < BOARD_WIDTH;j++){
+                if(!is_set(i, j)){
                     continue;
                 }
-                if(get(i, j) == 0){
-                    continue;
-                }
-                if(!is_set(i + h, j + v)){
-                    return true;
-                }
-                if(get(i, j) == get(i + h, j + v)){
+                if(can_move(i, j, h, v)){
                     return true;
                 }
             }
         }
         return false;
     }
-    
-    //TODO
-    //this bad make 4 diff funcs than call them from this func
-    //take pos in board move it fully than go to next one
-    //take pos starting from the direction you want to move in 
-    //if going down start from bottom of array
-    void make_move(unsigned int dir){
-        if(dir > 3){
-            return;
+
+    //check if board[i][j] can move is direction i + h, j + v
+    bool can_move(unsigned int i, unsigned int j, short h, short v){
+        if(is_ofb(i + h, j + v)){
+            return false;
         }
-        short h = directions[dir][0];
-        short v = directions[dir][1];
-        while(has_movable(h, v)){
-            for(size_t i = 0;i < BOARD_HEIGHT;i++){
-                for(size_t j = 0;j < BOARD_WIDTH;j++){
-                    if(is_ofb(i + h,j + v)){
-                        continue;
+        return !is_set(i + h, j + v) || get(i + h, j + v) == get(i, j);
+    }
+    
+    void move_down(){
+        short h = directions[DIR_DOWN][0];
+        short v = directions[DIR_DOWN][1];
+        for(size_t i = BOARD_HEIGHT - 1;i >= 0 && i < BOARD_HEIGHT;i--){
+            for(size_t j = 0;j < BOARD_WIDTH;j++){
+                if(!is_set(i, j)){
+                    continue;
+                }
+                size_t k = i;
+                while(can_move(k, j, h, v)){
+                    if(!is_set(k + h, j + v)){
+                        set(k + h, j + v, get(k, j));
+                        set(k, j, 0);
                     }
-                    if(!is_set(i + h,j + v)){
-                        set(i + h,j + v, get(i, j));
-                        set(i, j, 0);
+                    if(get(k + h, j + v) == get(k, j)){
+                        set(k + h, j + v, get(k, j) << 1);
+                        set(k, j, 0);
                     }
-                    if(get(i, j) == get(i + h,j + v)){
-                        set(i + h, j + v, get(i, j) << 1);
-                        set(i, j, 0);
-                    }
+                    k++;
                 }
             }
         }
+    }
+
+    void move_up(){
+        short h = directions[DIR_UP][0];
+        short v = directions[DIR_UP][1];
+        for(size_t i = 0;i < BOARD_HEIGHT;i++){
+            for(size_t j = 0;j < BOARD_WIDTH;j++){
+                if(!is_set(i, j)){
+                    continue;
+                }
+                size_t k = i;
+                while(can_move(k, j, h, v)){
+                    if(!is_set(k + h, j + v)){
+                        set(k + h, j + v, get(k, j));
+                        set(k, j, 0);
+                    }
+                    if(get(k + h, j + v) == get(k, j)){
+                        set(k + h, j + v, get(k, j) << 1);
+                        set(k, j, 0);
+                    }
+                    k--;
+                }
+            }
+        }
+    }
+
+    void move_left(){
+        short h = directions[DIR_LEFT][0];
+        short v = directions[DIR_LEFT][1];
+        for(size_t i = 0;i < BOARD_HEIGHT;i++){
+            for(size_t j = 0;j < BOARD_WIDTH;j++){
+                if(!is_set(i, j)){
+                    continue;
+                }
+                size_t k = j;
+                while(can_move(i, k, h, v)){
+                    if(!is_set(i + h, k + v)){
+                        set(i + h, k + v, get(i, k));
+                        set(i, k, 0);
+                    }
+                    if(get(i + h, k + v) == get(i, k)){
+                        set(i + h, k + v, get(i, k) << 1);
+                        set(i, k, 0);
+                    }
+                    k--;
+                }
+            }
+        }
+    }
+
+    void move_right(){
+        short h = directions[DIR_RIGHT][0];
+        short v = directions[DIR_RIGHT][1];
+        for(size_t i = 0;i < BOARD_HEIGHT;i++){
+            for(size_t j = BOARD_WIDTH - 1;j >= 0 && j < BOARD_WIDTH;j--){
+                if(!is_set(i, j)){
+                    continue;
+                }
+                size_t k = j;
+                while(can_move(i, k, h, v)){
+                    if(!is_set(i + h, k + v)){
+                        set(i + h, k + v, get(i, k));
+                        set(i, k, 0);
+                    }
+                    if(get(i + h, k + v) == get(i, k)){
+                        set(i + h, k + v, get(i, k) << 1);
+                        set(i, k, 0);
+                    }
+                    k++;
+                }
+            }
+        }
+    }
+
+    bool make_move(unsigned int dir){
+        if(dir <= 3 && !has_move(directions[dir][0], directions[dir][1])){
+            return false;
+        }
+        switch(dir){
+            case DIR_DOWN:
+                move_down();
+            break;
+            case DIR_UP:
+                move_up();
+            break;
+            case DIR_LEFT:
+                move_left();
+            break;
+            case DIR_RIGHT:
+                move_right();
+            break;
+            default:
+                return false;
+            break;
+        }
+        return true;
     }
 };
 
