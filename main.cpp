@@ -7,6 +7,8 @@
     #define PLATFORM "windows"
 #elif defined(__linux__)
     #define PLATFORM "linux"
+#elif defined(__APPLE__)
+    #define PLATFORM "apple"
 #else
     #define PLATFORM NULL
 #endif
@@ -32,7 +34,7 @@ int get_dir_from_string(string s){
 
 void clear_screen(){
     string platform = PLATFORM;
-    if(platform == "linux"){
+    if(platform == "linux" || platform == "apple"){
         system("clear");
     }
     if(platform == "windows"){
@@ -42,6 +44,7 @@ void clear_screen(){
 
 int main(){
     if(PLATFORM == NULL){
+        cout<<"os not supported"<<endl;
         return 0;
     }
     game_board gb;
@@ -55,9 +58,13 @@ int main(){
         if(s_dir[0] == 'q' || s_dir[0] == 'Q'){
             return 0;
         }
-        //clear_screen();
+        clear_screen();
         int dir = get_dir_from_string(s_dir);
-        gb.make_move(dir);
+        if(!gb.make_move(dir)){
+            clear_screen();
+            gb.print();
+            continue;
+        }
         gb.set_random(2);
         gb.print();
     }
