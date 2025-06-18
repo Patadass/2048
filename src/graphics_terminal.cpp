@@ -64,14 +64,19 @@ string graphics::get_color(unsigned int n){
     if(n == 0){
         return "\033[37;100m";
     }
-    string ansi = "\033[37;";
+    string ansi = "\033[";
     n = log2(n);
     if(n <= 6){
+        ansi += "37;";
         ansi += "4";
         ansi += (n + '0');
     }else if(n <= 12){
-        ansi += 100 + n - 6;
+        ansi += "30;";
+        n -= 6;
+        ansi += "10";
+        ansi += (n + '0');
     }else{
+        ansi += "37;";
         ansi += 40;
     }
     ansi += 'm';
