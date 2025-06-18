@@ -1,4 +1,4 @@
 all: terminal
 
 terminal:
-	g++ -o game main.cpp
+	g++ -o game src/main.cpp src/graphics_terminal.cpp
