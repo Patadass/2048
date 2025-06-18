@@ -1,0 +1,80 @@
+#include "graphics.h"
+#include <cmath>
+#include <cstddef>
+#include <cstdlib>
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+unsigned int graphics::board_row = 1;
+unsigned int graphics::board_column = 1;
+
+//set the position from which to draw the board
+void graphics::set_board_draw_pos(unsigned int row, unsigned int column){
+    graphics::board_row = row;
+    graphics::board_column = column;
+}
+
+//TODO
+//check number of columns and rows before setting cursos
+void graphics::set_cursor(unsigned int i, unsigned int j){
+    cout<<"\033["<<i<<";"<<j<<"H";
+}
+
+//move the cursor n rows down
+void graphics::cursor_down(unsigned int n = 1){
+    cout<<"\033["<<n<<"B";
+}
+
+//move the cursor n columns foward
+void graphics::cursor_foward(unsigned int n = 1){
+    cout<<"\033["<<n<<"C";
+}
+
+//move the cursor n columns back
+void graphics::cursor_back(unsigned int n = 1){
+    cout<<"\033["<<n<<"D";
+}
+
+//TODO
+//change space between fields based on size of number (num of chars)
+void graphics::draw_board(game_board board){
+    for(size_t i = 0;i < BOARD_HEIGHT;i++){
+        for(size_t j = 0;j < BOARD_WIDTH;j++){
+            cursor_foward(5);
+            cout<<get_color(board.get(i, j));
+            if(board.get(i, j) == 0){
+                cout<<" ";
+            }else{
+                cout<<board.get(i, j);
+            }
+            cursor_foward(5);
+        }
+        cursor_back(11*BOARD_WIDTH);
+        cursor_down(3);
+    }
+    cout<<"\033[0m";
+}
+
+//get the ansi escape code for the given n=2^a board field
+//codes 41-46 (red-cyan) for numbers 2 4 8 16 32 64
+//codes 101-106 (brightred-brightcyan) for numbers 128 256 512 1024 2048 4096
+string graphics::get_color(unsigned int n){
+    if(n == 0){
+        return "\033[37;100m";
+    }
+    string ansi = "\033[37;";
+    n = log2(n);
+    if(n <= 6){
+        ansi += "4";
+        ansi += (n + '0');
+    }else if(n <= 12){
+        ansi += 100 + n - 6;
+    }else{
+        ansi += 40;
+    }
+    ansi += 'm';
+    return ansi;
+}
+
