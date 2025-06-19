@@ -83,3 +83,13 @@ string graphics::get_color(unsigned int n){
     return ansi;
 }
 
+void graphics::clear_screen(){
+    string platform = PLATFORM;
+    if(platform == "linux" || platform == "apple"){
+        system("clear");
+    }
+    if(platform == "windows"){
+        system("cls");
+    }
+}
+
