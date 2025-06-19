@@ -3,19 +3,6 @@
 #include <cstdio>
 #include <cstdlib>
 
-#if defined(_WIN32)
-    #define PLATFOMR "windows"
-#elif defined(_WIN64)
-    #define PLATFORM "windows"
-#elif defined(__linux__)
-    #define PLATFORM "linux"
-#elif defined(__APPLE__)
-    #define PLATFORM "apple"
-#else
-    #define PLATFORM NULL
-#endif
-
-
 using namespace std;
 
 int get_dir_from_string(string s){
@@ -34,16 +21,6 @@ int get_dir_from_string(string s){
     return DIR_UP;
 }
 
-void clear_screen(){
-    string platform = PLATFORM;
-    if(platform == "linux" || platform == "apple"){
-        system("clear");
-    }
-    if(platform == "windows"){
-        system("cls");
-    }
-}
-
 int main(){
     if(PLATFORM == NULL){
         cout<<"os not supported"<<endl;
@@ -60,10 +37,10 @@ int main(){
         if(s_dir[0] == 'q' || s_dir[0] == 'Q'){
             return 0;
         }
-        clear_screen();
+        graphics::clear_screen();
         int dir = get_dir_from_string(s_dir);
         if(!gb.make_move(dir)){
-            clear_screen();
+            graphics::clear_screen();
             graphics::draw_board(gb);
             continue;
         }
