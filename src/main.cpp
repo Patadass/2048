@@ -28,6 +28,7 @@ int main(){
     }
     game_board gb;
     gb.set_random(2);
+    graphics::clear_screen();
     graphics::draw_board(gb);
     while(!gb.all_set()){
         string s_dir;
