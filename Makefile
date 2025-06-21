@@ -1,4 +1,4 @@
 all: terminal
 
 terminal:
-	g++ -o game src/main.cpp src/graphics_terminal.cpp
+	g++ -o 2048 src/main.cpp src/graphics_terminal.cpp
