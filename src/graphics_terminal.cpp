@@ -8,7 +8,7 @@
 using namespace std;
 
 unsigned int graphics::board_row = 1;
-unsigned int graphics::board_column = 1;
+unsigned int graphics::board_column = 0;
 
 //set the position from which to draw the board
 void graphics::set_board_draw_pos(unsigned int row, unsigned int column){
@@ -38,6 +38,7 @@ void graphics::cursor_back(unsigned int n = 1){
 }
 
 void graphics::draw_board(game_board board){
+    set_cursor(board_row, board_column);
     for(size_t i = 0;i < BOARD_HEIGHT;i++){
         for(size_t j = 0;j < BOARD_WIDTH;j++){
             int num_of_digits = 1;

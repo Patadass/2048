@@ -41,7 +41,7 @@ int main(){
         graphics::clear_screen();
         int dir = get_dir_from_string(s_dir);
         if(!gb.make_move(dir)){
-            graphics::clear_screen();
+            //graphics::clear_screen();
             graphics::draw_board(gb);
             continue;
         }
