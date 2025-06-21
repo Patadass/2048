@@ -60,7 +60,6 @@ void graphics::draw_board(game_board board){
             if(board.get(i, j) == 0){
                 cout<<" ";
             }else{
-                num_of_digits = log10(board.get(i, j)) + 1;
                 cout<<board.get(i, j);
             }
             for(int k = 0;k < right_space;k++){
