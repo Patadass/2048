@@ -37,23 +37,40 @@ void graphics::cursor_back(unsigned int n = 1){
     cout<<"\033["<<n<<"D";
 }
 
-//TODO
-//change space between fields based on size of number (num of chars)
 void graphics::draw_board(game_board board){
     for(size_t i = 0;i < BOARD_HEIGHT;i++){
         for(size_t j = 0;j < BOARD_WIDTH;j++){
-            cursor_foward(5);
+            int num_of_digits = 1;
+            if(board.get(i, j) > 0){
+                num_of_digits = log10(board.get(i, j)) + 1;
+            }
+
+            int left_space = 5;
+            int right_space = 5 - (num_of_digits / 2);
+            if(num_of_digits % 2 == 0){
+                left_space -= (num_of_digits / 2) - 1;
+            }else{
+                left_space -= (num_of_digits / 2);
+            }
+
             cout<<get_color(board.get(i, j));
+            for(int k = 0;k < left_space;k++){
+                cout<<" ";
+            }
             if(board.get(i, j) == 0){
                 cout<<" ";
             }else{
+                num_of_digits = log10(board.get(i, j)) + 1;
                 cout<<board.get(i, j);
             }
-            cursor_foward(5);
+            for(int k = 0;k < right_space;k++){
+                cout<<" ";
+            }
         }
         cursor_back(11*BOARD_WIDTH);
         cursor_down(3);
     }
+    //reset
     cout<<"\033[0m";
 }
 
