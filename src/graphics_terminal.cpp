@@ -27,6 +27,11 @@ void graphics::cursor_down(unsigned int n = 1){
     cout<<"\033["<<n<<"B";
 }
 
+//move the cursor n rows up
+void graphics::cursor_up(unsigned int n = 1){
+    cout<<"\033["<<n<<"A";
+}
+
 //move the cursor n columns foward
 void graphics::cursor_foward(unsigned int n = 1){
     cout<<"\033["<<n<<"C";
@@ -55,6 +60,14 @@ void graphics::draw_board(game_board board){
             }
 
             cout<<get_color(board.get(i, j));
+
+            //TODO dont hardcode 11
+            for(int k = 0;k < 11;k++){
+                cout<<" ";
+            }
+            cursor_down(1);
+            cursor_back(11);
+
             for(int k = 0;k < left_space;k++){
                 cout<<" ";
             }
@@ -66,6 +79,14 @@ void graphics::draw_board(game_board board){
             for(int k = 0;k < right_space;k++){
                 cout<<" ";
             }
+
+            cursor_down(1);
+            cursor_back(11);
+            //TODO dont hardcode 11
+            for(int k = 0;k < 11;k++){
+                cout<<" ";
+            }
+            cursor_up(2);
         }
         cursor_back(11*BOARD_WIDTH);
         cursor_down(3);
