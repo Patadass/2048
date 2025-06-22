@@ -1,5 +1,5 @@
-#2048 cli
-##Compiling
+# 2048 cli
+## Compiling
 linux/macos/unix
 ```
 make
