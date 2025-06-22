@@ -1,5 +1,5 @@
 # 2048 cli
-## Compiling
+## Build
 linux/macos/unix
 ```
 make
