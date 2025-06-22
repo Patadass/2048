@@ -16,14 +16,13 @@
     #define PLATFORM NULL
 #endif
 
-//TODO
-//make graphics be responsible for clearing the screen and checking os
-
 struct graphics{
     static unsigned int board_row;
     static unsigned int board_column;
+    static unsigned int field_size;
 
     static void set_board_draw_pos(unsigned int row, unsigned int column);
+    static void set_field_size(unsigned int n);
     static void set_cursor(unsigned int row, unsigned int column);
 
     static void cursor_down(unsigned int n);
