@@ -9,6 +9,19 @@ using namespace std;
 
 unsigned int graphics::board_row = 1;
 unsigned int graphics::board_column = 0;
+unsigned int graphics::field_size = 9;
+
+//set size of field
+void graphics::set_field_size(unsigned int n){
+    if(n < 4 || n > 20){
+        n = graphics::field_size;
+    }else{
+        if(n % 2 == 0){
+            n++;
+        }
+        graphics::field_size = n;
+    }
+}
 
 //set the position from which to draw the board
 void graphics::set_board_draw_pos(unsigned int row, unsigned int column){
@@ -51,8 +64,8 @@ void graphics::draw_board(game_board board){
                 num_of_digits = log10(board.get(i, j)) + 1;
             }
 
-            int left_space = 5;
-            int right_space = 5 - (num_of_digits / 2);
+            int left_space = field_size / 2;
+            int right_space = (field_size / 2) - (num_of_digits / 2);
             if(num_of_digits % 2 == 0){
                 left_space -= (num_of_digits / 2) - 1;
             }else{
@@ -61,12 +74,11 @@ void graphics::draw_board(game_board board){
 
             cout<<get_color(board.get(i, j));
 
-            //TODO dont hardcode 11
-            for(int k = 0;k < 11;k++){
+            for(int k = 0;k < field_size;k++){
                 cout<<" ";
             }
             cursor_down(1);
-            cursor_back(11);
+            cursor_back(field_size);
 
             for(int k = 0;k < left_space;k++){
                 cout<<" ";
@@ -81,14 +93,13 @@ void graphics::draw_board(game_board board){
             }
 
             cursor_down(1);
-            cursor_back(11);
-            //TODO dont hardcode 11
-            for(int k = 0;k < 11;k++){
+            cursor_back(field_size);
+            for(int k = 0;k < field_size;k++){
                 cout<<" ";
             }
             cursor_up(2);
         }
-        cursor_back(11*BOARD_WIDTH);
+        cursor_back(field_size*BOARD_WIDTH);
         cursor_down(3);
     }
     //reset
