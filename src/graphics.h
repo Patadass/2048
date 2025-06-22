@@ -29,6 +29,7 @@ struct graphics{
     static void cursor_down(unsigned int n);
     static void cursor_foward(unsigned int n);
     static void cursor_back(unsigned int n);
+    static void cursor_up(unsigned int n);
 
     static void draw_board(game_board board);
 
