@@ -6,4 +6,4 @@ terminal:
 	g++ -o 2048 $(CPP_FILES)
 
 windows:
-	g++ -o 2048.exe src/main.cpp src/graphics_terminal.cpp
+	g++ -o 2048.exe .\src\main.cpp .\src\graphics_terminal.cpp
