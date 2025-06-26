@@ -4,7 +4,7 @@ linux/macos/unix
 ```
 make
 ```
-windows (!!neam probano na windows ali valjda raboti!!)
+windows 
 ```
 make windows
 ```
