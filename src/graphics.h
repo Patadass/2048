@@ -10,6 +10,7 @@
     #define PLATFORM "windows"
 #elif defined(__linux__)
     #define PLATFORM "linux"
+    #define LINUX
 #elif defined(__APPLE__)
     #define PLATFORM "apple"
 #else
@@ -19,10 +20,13 @@
 struct graphics{
     static unsigned int board_row;
     static unsigned int board_column;
-    static unsigned int field_size;
+    static unsigned int field_width;
+    static unsigned int field_height;
 
     static void set_board_draw_pos(unsigned int row, unsigned int column);
-    static void set_field_size(unsigned int n);
+    static void center_board();
+    static bool is_window_size_change();
+    static void set_field_width(unsigned int n);
     static void set_cursor(unsigned int row, unsigned int column);
 
     static void cursor_down(unsigned int n);
@@ -30,7 +34,7 @@ struct graphics{
     static void cursor_back(unsigned int n);
     static void cursor_up(unsigned int n);
 
-    static void draw_board(game_board board);
+    static void draw_board(game_board board, bool center=true);
 
     static std::string get_color(unsigned int n);
 
