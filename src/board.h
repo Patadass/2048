@@ -149,6 +149,7 @@ public:
                     if(get(k + h, j + v) == get(k, j)){
                         set(k + h, j + v, get(k, j) << 1);
                         set(k, j, 0);
+                        break;
                     }
                     k++;
                 }
@@ -173,6 +174,7 @@ public:
                     if(get(k + h, j + v) == get(k, j)){
                         set(k + h, j + v, get(k, j) << 1);
                         set(k, j, 0);
+                        break;
                     }
                     k--;
                 }
@@ -197,6 +199,7 @@ public:
                     if(get(i + h, k + v) == get(i, k)){
                         set(i + h, k + v, get(i, k) << 1);
                         set(i, k, 0);
+                        break;
                     }
                     k--;
                 }
@@ -221,6 +224,7 @@ public:
                     if(get(i + h, k + v) == get(i, k)){
                         set(i + h, k + v, get(i, k) << 1);
                         set(i, k, 0);
+                        break;
                     }
                     k++;
                 }
