@@ -31,6 +31,7 @@ void graphics::init(){
     init_pair(4, COLOR_BLACK, COLOR_BLUE);
     init_pair(5, COLOR_BLACK, COLOR_MAGENTA);
     init_pair(6, COLOR_BLACK, COLOR_CYAN);
+    init_pair(7, COLOR_WHITE, COLOR_WHITE);
     bkgd(COLOR_PAIR(9));
 }
 
@@ -151,7 +152,7 @@ void graphics::draw_board(game_board board, bool center){
 
 int graphics::get_color_pair(unsigned int n){
     if(n == 0){
-        return 9;
+        return 7;
     }
     n = log2(n);
     if(n % 6 == 0){
