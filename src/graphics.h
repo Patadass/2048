@@ -23,6 +23,8 @@ struct graphics{
     static unsigned int field_width;
     static unsigned int field_height;
 
+    static void init();
+    static void end();
     static void set_board_draw_pos(unsigned int row, unsigned int column);
     static void center_board();
     static bool is_window_size_change();
@@ -37,6 +39,7 @@ struct graphics{
     static void draw_board(game_board board, bool center=true);
 
     static std::string get_color(unsigned int n);
+    static int get_color_pair(unsigned int n);
 
     static void clear_screen();
 };
