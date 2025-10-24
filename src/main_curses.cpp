@@ -21,8 +21,7 @@ int main(){
         int s_dir;
         s_dir = getch();
         if(s_dir == 'q' || s_dir == 'Q'){
-            graphics::end();
-            return 0;
+            break;
         }
         int dir;
         switch(s_dir){
@@ -43,7 +42,6 @@ int main(){
         }
         graphics::clear_screen();
         if(!gb.make_move(dir)){
-            //graphics::clear_screen();
             graphics::draw_board(gb);
             continue;
         }
@@ -51,4 +49,5 @@ int main(){
         graphics::draw_board(gb);
     }
     graphics::end();
+    return 0;
 }
