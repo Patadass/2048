@@ -13,6 +13,13 @@ struct logger{
 private:
     static bool erase;
 public:
-    static void write(std::string line, int log_time=TIME_OFF);
+    static void write(std::string fmt, int log_time, ...);
 };
+
+struct converter{
+public:
+    //int to string
+    static std::string itos(int o);
+};
+
 #endif
