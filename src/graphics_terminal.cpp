@@ -130,6 +130,13 @@ void graphics::draw_board(game_board board, bool center){
     cout<<"\033[0m";
 }
 
+void graphics::draw_score(game_board board){
+    cout<<get_color(board.get_largest());
+    set_cursor(0, 0);
+    cout<<"Score: "<<board.get_largest();
+    cout<<"\033[0m";
+}
+
 //get the ansi escape code for the given n=2^a board field
 //codes 41-46 (red-cyan) for numbers 2 4 8 16 32 64
 //codes 101-106 (brightred-brightcyan) for numbers 128 256 512 1024 2048 4096
