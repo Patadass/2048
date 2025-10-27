@@ -24,6 +24,7 @@ const short directions[4][2] = {
 struct game_board{
 private:
     unsigned int board[BOARD_HEIGHT][BOARD_WIDTH];
+    unsigned int _largest;
 
     
 
@@ -147,6 +148,7 @@ public:
                         set(k, j, 0);
                     }
                     if(get(k + h, j + v) == get(k, j)){
+                        change_if_largest(get(k, j) << 1);
                         set(k + h, j + v, get(k, j) << 1);
                         set(k, j, 0);
                         break;
@@ -172,6 +174,7 @@ public:
                         set(k, j, 0);
                     }
                     if(get(k + h, j + v) == get(k, j)){
+                        change_if_largest(get(k, j) << 1);
                         set(k + h, j + v, get(k, j) << 1);
                         set(k, j, 0);
                         break;
@@ -197,6 +200,7 @@ public:
                         set(i, k, 0);
                     }
                     if(get(i + h, k + v) == get(i, k)){
+                        change_if_largest(get(k, j) << 1);
                         set(i + h, k + v, get(i, k) << 1);
                         set(i, k, 0);
                         break;
@@ -222,6 +226,7 @@ public:
                         set(i, k, 0);
                     }
                     if(get(i + h, k + v) == get(i, k)){
+                        change_if_largest(get(k, j) << 1);
                         set(i + h, k + v, get(i, k) << 1);
                         set(i, k, 0);
                         break;
@@ -254,6 +259,18 @@ public:
             break;
         }
         return true;
+    }
+
+    //set new largest if o is >
+    void change_if_largest(unsigned int o){
+        if(o > _largest){
+            _largest = o;
+        }
+        return;
+    }
+
+    unsigned int get_largest(){
+        return _largest;
     }
 };
 

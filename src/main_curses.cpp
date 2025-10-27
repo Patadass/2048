@@ -1,5 +1,6 @@
 #include "board.h"
 #include "graphics.h"
+#include "util.h"
 #include <cstdio>
 #include <cstdlib>
 #include <ncurses.h>
