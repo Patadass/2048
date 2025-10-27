@@ -24,12 +24,11 @@ const short directions[4][2] = {
 struct game_board{
 private:
     unsigned int board[BOARD_HEIGHT][BOARD_WIDTH];
-    unsigned int _largest;
-
-    
+    int _largest;
 
 public:
     game_board(){
+        _largest = 0;
         for(size_t i = 0;i < BOARD_HEIGHT;i++){
             for(size_t j = 0;j < BOARD_WIDTH;j++){
                 board[i][j] = 0;
@@ -86,6 +85,7 @@ public:
             return;
         }
         board[i][j] = o;
+        change_if_largest(o);
     }
 
     //set the value of random field of board to o
@@ -148,7 +148,6 @@ public:
                         set(k, j, 0);
                     }
                     if(get(k + h, j + v) == get(k, j)){
-                        change_if_largest(get(k, j) << 1);
                         set(k + h, j + v, get(k, j) << 1);
                         set(k, j, 0);
                         break;
@@ -174,7 +173,6 @@ public:
                         set(k, j, 0);
                     }
                     if(get(k + h, j + v) == get(k, j)){
-                        change_if_largest(get(k, j) << 1);
                         set(k + h, j + v, get(k, j) << 1);
                         set(k, j, 0);
                         break;
@@ -200,7 +198,6 @@ public:
                         set(i, k, 0);
                     }
                     if(get(i + h, k + v) == get(i, k)){
-                        change_if_largest(get(k, j) << 1);
                         set(i + h, k + v, get(i, k) << 1);
                         set(i, k, 0);
                         break;
@@ -226,7 +223,6 @@ public:
                         set(i, k, 0);
                     }
                     if(get(i + h, k + v) == get(i, k)){
-                        change_if_largest(get(k, j) << 1);
                         set(i + h, k + v, get(i, k) << 1);
                         set(i, k, 0);
                         break;
@@ -262,14 +258,14 @@ public:
     }
 
     //set new largest if o is >
-    void change_if_largest(unsigned int o){
-        if(o > _largest){
+    void change_if_largest(int o){
+        if(o >= _largest){
             _largest = o;
         }
         return;
     }
 
-    unsigned int get_largest(){
+    int get_largest(){
         return _largest;
     }
 };
