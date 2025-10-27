@@ -37,6 +37,7 @@ struct graphics{
     static void cursor_up(unsigned int n);
 
     static void draw_board(game_board board, bool center=true);
+    static void draw_score(game_board board);
 
     static std::string get_color(unsigned int n);
     static int get_color_pair(unsigned int n);

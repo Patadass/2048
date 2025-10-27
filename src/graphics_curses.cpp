@@ -150,6 +150,12 @@ void graphics::draw_board(game_board board, bool center){
     }
 }
 
+void graphics::draw_score(game_board board){
+    attron(COLOR_PAIR(get_color_pair(board.get_largest())));
+    mvprintw(0, 0, "Score: %d", board.get_largest());
+    attroff(COLOR_PAIR(get_color_pair(board.get_largest())));
+}
+
 int graphics::get_color_pair(unsigned int n){
     if(n == 0){
         return 7;
