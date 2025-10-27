@@ -44,10 +44,12 @@ int main(){
         graphics::clear_screen();
         if(!gb.make_move(dir)){
             graphics::draw_board(gb);
+            graphics::draw_score(gb);
             continue;
         }
         gb.set_random(2);
         graphics::draw_board(gb);
+        graphics::draw_score(gb);
     }
     graphics::end();
     return 0;
