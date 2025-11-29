@@ -1,5 +1,3 @@
-CPP_FILES := $(wildcard src/*.cpp)
-
 all: terminal
 
 terminal:
