@@ -1,5 +1,6 @@
 #include "board.h"
 #include <string>
+#include <fstream>
 
 #ifndef GRAPHICS_H
 #define GRAPHICS_H
@@ -43,5 +44,11 @@ struct graphics{
     static int get_color_pair(unsigned int n);
 
     static void clear_screen();
+    
+    //for logger
+    //returns WINDOW* if using curses and void if not
+    static void* create_window(int height, int widht, int starty,int startx);
+    static void destory_win(void* local_win);
+    static void print_on_window(void* window, std::ifstream* f);
 };
 #endif

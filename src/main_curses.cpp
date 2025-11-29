@@ -19,6 +19,8 @@ int main(){
     graphics::center_board();
     graphics::draw_board(gb);
     graphics::draw_score(gb);
+
+    WINDOW* win;
     while(!gb.all_set()){
         int s_dir;
         s_dir = getch();
@@ -38,6 +40,13 @@ int main(){
             break;
             case 'w':
                 dir = DIR_UP;
+            break;
+            case 'l':
+                refresh();
+                win = (WINDOW*) logger::show_log();
+                wrefresh(win);
+                getch();
+                logger::ushow_log();
             break;
             default:
             continue;

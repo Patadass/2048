@@ -170,3 +170,35 @@ int graphics::get_color_pair(unsigned int n){
 void graphics::clear_screen(){
     clear();
 }
+
+
+//for logger
+void* graphics::create_window(int height, int widht, int starty, int startx){
+    WINDOW* local_win;
+    local_win = newwin(height, widht, starty, startx);
+    box(local_win, 0, 0);//draw edges
+    return local_win;
+}
+
+void graphics::destory_win(void* local_win){
+    WINDOW* win = (WINDOW*) local_win;
+    wclear(win);
+    wborder(win, ' ', ' ', ' ',' ',' ',' ',' ',' ');
+    wrefresh(win);
+    delwin(win);
+}
+
+void graphics::print_on_window(void* window, std::ifstream* f){
+    if(!f->is_open()){
+        return;
+    }
+    WINDOW* win = (WINDOW*) window;
+    int cpy = 1;
+    wmove(win, cpy, 1);
+    string line;
+    while(getline(*f, line)){
+        wprintw(win, "%s", line.c_str());
+        wmove(win, ++cpy, 1);
+    }
+    wrefresh(win);
+}

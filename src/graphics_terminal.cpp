@@ -173,3 +173,21 @@ void graphics::clear_screen(){
     }
 }
 
+
+
+//for logger
+
+//TODO
+void* graphics::create_window(int height, int widht, int starty, int startx){
+    return nullptr;
+}
+
+//TODO
+void graphics::destory_win(void* local_win){
+    return;
+}
+
+//TODO
+void graphics::print_on_window(void* window, std::ifstream* f){
+    return;
+}

@@ -1,4 +1,5 @@
 #include "util.h"
+#include "graphics.h"
 #include <cstdarg>
 #include <fstream>
 #include <ctime>
@@ -7,6 +8,7 @@
 using namespace std;
 
 bool logger::erase = true;
+void* logger::win = nullptr;
 
 void logger::write(string fmt, int log_time, ...){
     ofstream stream;
@@ -14,7 +16,7 @@ void logger::write(string fmt, int log_time, ...){
     string line = "";
     va_list args;
     va_start(args, log_time);
-    for(int i = 0;i < fmt.length();i++){
+    for(size_t i = 0;i < fmt.length();i++){
         if(fmt[i] != '%'){
             line += fmt[i];
             continue;
@@ -45,6 +47,19 @@ void logger::write(string fmt, int log_time, ...){
     }
     stream<<line<<"\n";
     stream.close();
+}
+
+void* logger::show_log(){
+    ifstream f;
+    win = graphics::create_window(30, 50, 1, 1);
+    f.open("./log");
+    graphics::print_on_window(win, &f);
+    f.close();
+    return win;
+}
+
+void logger::ushow_log(){
+    graphics::destory_win(win);
 }
 
 
