@@ -178,7 +178,7 @@ void graphics::clear_screen(){
 //for logger
 
 //TODO
-void* graphics::create_window(int height, int widht, int starty, int startx){
+void* graphics::create_window(int height, int widht, int starty, int startx, string title){
     return nullptr;
 }
 
