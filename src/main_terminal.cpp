@@ -30,6 +30,7 @@ int main(){
     gb.set_random(2);
     graphics::clear_screen();
     graphics::center_board();
+    graphics::draw_score(gb);
     graphics::draw_board(gb);
     while(!gb.all_set()){
         string s_dir;

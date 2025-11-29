@@ -133,7 +133,7 @@ void graphics::draw_board(game_board board, bool center){
 void graphics::draw_score(game_board board){
     cout<<get_color(board.get_largest());
     set_cursor(0, 0);
-    cout<<"Score: "<<board.get_largest();
+    cout<<"Score: "<<board.get_score();
     cout<<"\033[0m";
 }
 

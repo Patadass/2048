@@ -25,10 +25,12 @@ struct game_board{
 private:
     unsigned int board[BOARD_HEIGHT][BOARD_WIDTH];
     int _largest;
+    int _score;
 
 public:
     game_board(){
         _largest = 0;
+        _score = 0;
         for(size_t i = 0;i < BOARD_HEIGHT;i++){
             for(size_t j = 0;j < BOARD_WIDTH;j++){
                 board[i][j] = 0;
@@ -149,6 +151,7 @@ public:
                     }
                     if(get(k + h, j + v) == get(k, j)){
                         set(k + h, j + v, get(k, j) << 1);
+                        update_score(get(k + h, j + v));
                         set(k, j, 0);
                         break;
                     }
@@ -174,6 +177,7 @@ public:
                     }
                     if(get(k + h, j + v) == get(k, j)){
                         set(k + h, j + v, get(k, j) << 1);
+                        update_score(get(k + h, j + v));
                         set(k, j, 0);
                         break;
                     }
@@ -199,6 +203,7 @@ public:
                     }
                     if(get(i + h, k + v) == get(i, k)){
                         set(i + h, k + v, get(i, k) << 1);
+                        update_score(get(i + h, k + v));
                         set(i, k, 0);
                         break;
                     }
@@ -224,6 +229,7 @@ public:
                     }
                     if(get(i + h, k + v) == get(i, k)){
                         set(i + h, k + v, get(i, k) << 1);
+                        update_score(get(i + h, k + v));
                         set(i, k, 0);
                         break;
                     }
@@ -265,6 +271,14 @@ public:
         return;
     }
 
+    void update_score(int o){
+        _score += o;
+        return;
+    }
+
+    int get_score(){
+        return _score;
+    }
     int get_largest(){
         return _largest;
     }

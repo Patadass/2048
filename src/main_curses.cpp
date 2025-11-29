@@ -18,6 +18,7 @@ int main(){
     graphics::clear_screen();
     graphics::center_board();
     graphics::draw_board(gb);
+    graphics::draw_score(gb);
     while(!gb.all_set()){
         int s_dir;
         s_dir = getch();
