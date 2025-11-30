@@ -2,7 +2,6 @@
 #include "graphics.h"
 #include <cstdarg>
 #include <fstream>
-#include <ctime>
 #include <string>
 
 using namespace std;
@@ -10,12 +9,12 @@ using namespace std;
 bool logger::erase = true;
 void* logger::win = nullptr;
 
-void logger::write(string fmt, int log_time, ...){
+void logger::write(string fmt, ...){
     ofstream stream;
 
     string line = "";
     va_list args;
-    va_start(args, log_time);
+    va_start(args, fmt);
     for(size_t i = 0;i < fmt.length();i++){
         if(fmt[i] != '%'){
             line += fmt[i];
@@ -38,13 +37,6 @@ void logger::write(string fmt, int log_time, ...){
         stream.open(LOG_FILE_PATH, ios::app);
     }
 
-    if(log_time == TIME_ON){
-        time_t timestamp;
-        char out[30];
-        time(&timestamp);
-        strftime(out, 30, "[%F %H:%M:%S] ", localtime(&timestamp));
-        stream<<out;
-    }
     stream<<line<<"\n";
     stream.close();
 }
