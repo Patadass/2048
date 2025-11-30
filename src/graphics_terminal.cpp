@@ -208,6 +208,8 @@ void* graphics::create_window(int height, int widht, int starty, int startx, str
 
 //TODO
 void graphics::destory_win(void* local_win){
+    delete (WIN*) local_win;
+    local_win = nullptr;
     clear_screen();// :( 
     return;
 }
