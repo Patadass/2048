@@ -20,10 +20,15 @@ int main(){
     graphics::draw_board(gb);
     graphics::draw_score(gb);
 
-    WINDOW* win;
+    WINDOW* win = nullptr;
     while(!gb.all_set()){
-        int s_dir;
-        s_dir = getch();
+        if(win != nullptr){
+            refresh();
+            logger::ushow_log();
+            win = (WINDOW*) logger::show_log();
+            wrefresh(win);
+        }
+        int s_dir = getch();
         if(s_dir == 'q' || s_dir == 'Q'){
             break;
         }
@@ -42,23 +47,28 @@ int main(){
                 dir = DIR_UP;
             break;
             case 'l':
-                refresh();
-                win = (WINDOW*) logger::show_log();
-                wrefresh(win);
-                getch();
-                logger::ushow_log();
                 dir = DIR_LOG;
             break;
             default:
                 dir = DIR_UNDEF;
             continue;
         }
-        graphics::clear_screen();
-        if(!gb.make_move(dir)){
-            graphics::draw_board(gb);
-            graphics::draw_score(gb);
+        if(dir == DIR_LOG){
+            if(win != nullptr){
+                logger::ushow_log();
+                win = nullptr;
+                graphics::clear_screen();
+                graphics::draw_board(gb);
+                graphics::draw_score(gb);
+                continue;
+            }
+            win = (WINDOW*) logger::show_log();
             continue;
         }
+        if(!gb.make_move(dir)){
+            continue;
+        }
+        graphics::clear_screen();
         gb.set_random(2);
         graphics::draw_board(gb);
         graphics::draw_score(gb);
