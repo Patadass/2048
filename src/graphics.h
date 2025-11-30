@@ -47,6 +47,7 @@ struct graphics{
     
     //for logger
     //returns WINDOW* if using curses and void if not
+    struct WIN;
     static void* create_window(int height, int widht, int starty,int startx, std::string title = "log");
     static void destory_win(void* local_win);
     static void print_on_window(void* window, std::ifstream* f);

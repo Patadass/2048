@@ -177,17 +177,52 @@ void graphics::clear_screen(){
 
 //for logger
 
-//TODO
+struct graphics::WIN{
+    int height, width, starty, startx;
+    WIN(int height, int width, int starty, int startx){
+        this->height = height;
+        this->width = width;
+        this->starty = starty;
+        this->startx = startx;
+    }
+};
+
 void* graphics::create_window(int height, int widht, int starty, int startx, string title){
-    return nullptr;
+    set_cursor(starty, startx);
+    for(int i = 0;i < height;i++){
+        for(int j = 0;j < widht;j++){
+            if(j == 0 || j + 1 >= widht){
+                cout<<"|";
+            }else if(i == 0 || i  + 1 >= height){
+                cout<<"_";
+            }else{
+                cout<<" ";
+            }
+        }
+        cursor_down(1);
+        cursor_back(widht);
+    }
+    WIN* win = new WIN(height, widht, starty, startx);
+    return win;
 }
 
 //TODO
 void graphics::destory_win(void* local_win){
+    clear_screen();// :( 
     return;
 }
 
-//TODO
 void graphics::print_on_window(void* window, std::ifstream* f){
+    if(!f->is_open()){
+        return;
+    }
+    WIN* win = (WIN*) window;
+    int cpy = win->starty + 1;
+    set_cursor(cpy, win->startx + 1);
+    string line;
+    while(getline(*f, line)){
+        cout<<line;
+        set_cursor(++cpy, win->startx + 1);
+    }
     return;
 }

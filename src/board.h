@@ -13,6 +13,8 @@
 #define DIR_RIGHT 1
 #define DIR_DOWN 2
 #define DIR_LEFT 3
+#define DIR_LOG 4
+#define DIR_UNDEF 99
 
 const short directions[4][2] = {
         {-1, 0},

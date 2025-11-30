@@ -1,5 +1,6 @@
 #include "board.h"
 #include "graphics.h"
+#include "util.h"
 #include <cstdio>
 #include <cstdlib>
 
@@ -18,7 +19,10 @@ int get_dir_from_string(string s){
     if(s[0] == 'a' || s[0] == 'A'){
         return DIR_LEFT;
     }
-    return DIR_UP;
+    if(s[0] == 'l' || s[0] == 'L'){
+        return DIR_LOG;
+    }
+    return DIR_UNDEF;
 }
 
 int main(){
@@ -40,8 +44,21 @@ int main(){
         if(s_dir[0] == 'q' || s_dir[0] == 'Q'){
             return 0;
         }
-        graphics::clear_screen();
         int dir = get_dir_from_string(s_dir);
+        if(dir == DIR_UNDEF){
+            graphics::clear_screen();
+            graphics::draw_score(gb);
+            graphics::draw_board(gb);
+            continue;
+        }
+        if(dir == DIR_LOG){
+            logger::show_log();
+            cin>>s_dir;
+            logger::ushow_log();
+            graphics::draw_score(gb);
+            graphics::draw_board(gb);
+            continue;
+        }
         if(!gb.make_move(dir)){
             graphics::draw_score(gb);
             graphics::draw_board(gb);
