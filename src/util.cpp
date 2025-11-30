@@ -43,7 +43,7 @@ void logger::write(string fmt, ...){
 
 void* logger::show_log(){
     ifstream f;
-    win = graphics::create_window(30, 50, 1, 1);
+    win = graphics::create_window(30, 30, 1, 1);
     f.open(LOG_FILE_PATH);
     graphics::print_on_window(win, &f);
     f.close();
