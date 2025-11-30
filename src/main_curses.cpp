@@ -47,8 +47,10 @@ int main(){
                 wrefresh(win);
                 getch();
                 logger::ushow_log();
+                dir = DIR_LOG;
             break;
             default:
+                dir = DIR_UNDEF;
             continue;
         }
         graphics::clear_screen();
