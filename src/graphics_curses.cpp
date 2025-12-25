@@ -173,9 +173,9 @@ void graphics::clear_screen(){
 
 
 //for logger
-void* graphics::create_window(int height, int widht, int starty, int startx, string title){
+void* graphics::create_window(int height, int width, int starty, int startx, string title){
     WINDOW* local_win;
-    local_win = newwin(height, widht, starty, startx);
+    local_win = newwin(height, width, starty, startx);
     box(local_win, 0, 0);//draw edges
     wmove(local_win, 0, 1);
     wprintw(local_win, "%s", title.c_str());
