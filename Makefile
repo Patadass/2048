@@ -1,10 +1,13 @@
+t_src = $(wildcard ./src/*terminal.cpp)
+c_src = $(wildcard ./src/*curses.cpp)
+
+FLAGS = -lncurses
+
 all: terminal
 
 terminal:
-	g++ -o 2048 ./src/main_terminal.cpp ./src/graphics_terminal.cpp ./src/util.cpp
+	$(CXX) -o 2048 $(t_src) ./src/util.cpp
 
 curses:
-	g++ -o 2048 ./src/main_curses.cpp ./src/graphics_curses.cpp ./src/util.cpp -lncurses
+	$(CXX) -o 2048 $(c_src) ./src/util.cpp $(FLAGS)
 
-windows:
-	g++ -o 2048.exe .\src\main.cpp .\src\graphics_terminal.cpp
