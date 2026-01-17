@@ -1,14 +1,30 @@
 # 2048 cli
+
+![curses look](https://github.com/Patadass/2048/blob/main/photos/curses.png?raw=true)
+
 ## Build
 ### Terminal
-linux/macos/unix
+on linux/macos/unix
 ```
 make
 ```
-![terminal look](https://github.com/Patadass/2048/blob/main/photos/terminal.png?raw=true)
 ### With curses
-linux/macos/unix
+This version requires ```libncurses-dev```. Use your distros package manager to obtain it<br><br>
+
+Debian/ubuntu
+```
+apt-get isntall libncurses-dev
+```
+<br>Arch
+```
+pacman -S ncurses
+```
+<br>Fedora
+```
+dnf install ncurses-devel
+```
+<br>Then
 ```
 make curses
 ```
-![curses look](https://github.com/Patadass/2048/blob/main/photos/curses.png?raw=true)
+
