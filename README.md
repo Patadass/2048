@@ -20,7 +20,7 @@ apt-get install libncurses-dev
 ```
 <br>Arch
 ```bash
-pacman -S ncurses
+pacman -Sy ncurses
 ```
 <br>Fedora
 ```bash
