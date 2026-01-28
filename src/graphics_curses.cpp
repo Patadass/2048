@@ -31,7 +31,7 @@ void graphics::init(){
     init_pair(4, COLOR_BLACK, COLOR_BLUE);
     init_pair(5, COLOR_BLACK, COLOR_MAGENTA);
     init_pair(6, COLOR_BLACK, COLOR_CYAN);
-    init_pair(7, COLOR_WHITE, COLOR_WHITE);
+    init_pair(7, COLOR_BLACK, COLOR_WHITE);
     bkgd(COLOR_PAIR(9));
 }
 
@@ -129,7 +129,7 @@ void graphics::draw_board(game_board board, bool center){
                 printw(" ");
             }
             if(board.get(i, j) == 0){
-                printw(" ");
+                printw(".");
             }else{
                 printw("%d", board.get(i, j));
             }
