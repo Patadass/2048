@@ -55,7 +55,7 @@ public:
         return (i >= BOARD_HEIGHT) || (j >= BOARD_WIDTH);
     }
 
-    //check if board[i][j] has been set
+    //check if board on i j has been set
     bool is_set(unsigned int i, unsigned int j){
         if(is_ofb(i, j)){
             return true;
@@ -75,7 +75,7 @@ public:
         return true;
     }
 
-    //get the value of board[i][j]
+    //get the value of board on pos i j
     unsigned int get(unsigned int i, unsigned int j){
         if(is_ofb(i, j)){
             return 1;
@@ -83,7 +83,7 @@ public:
         return board[i][j];
     }
 
-    //set the value of board[i][j] to o
+    //set the value of board on pos i j to o
     void set(unsigned int i, unsigned int j, unsigned int o){
         if(is_ofb(i, j)){
             return;
@@ -129,7 +129,7 @@ public:
         return false;
     }
 
-    //check if board[i][j] can move is direction i + h, j + v
+    //check if board on pos i j can move in direction i + h, j + v
     bool can_move(unsigned int i, unsigned int j, short h, short v){
         if(is_ofb(i + h, j + v)){
             return false;
