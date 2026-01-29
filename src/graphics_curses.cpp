@@ -22,6 +22,7 @@ unsigned int graphics::field_height = 3;
 
 void graphics::init(){
     initscr();
+    curs_set(0);
     start_color();
     init_color(COLOR_BLACK, 0, 0, 0);
     init_pair(9, COLOR_BLACK, COLOR_BLACK);
@@ -195,12 +196,12 @@ void graphics::print_on_window(void* window, std::ifstream* f){
         return;
     }
     WINDOW* win = (WINDOW*) window;
-    int cpy = 1;
-    wmove(win, cpy, 1);
+    scrollok(win, TRUE);
+    wmove(win, 1, 1);
     string line;
     while(getline(*f, line)){
-        wprintw(win, "%s", line.c_str());
-        wmove(win, ++cpy, 1);
+        wprintw(win, " %s\n", line.c_str());
     }
+    box(win, 0, 0);
     wrefresh(win);
 }
