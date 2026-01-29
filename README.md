@@ -4,12 +4,6 @@
 
 ## Build
 
-### Terminal
-
-on linux/macos/unix
-```
-make
-```
 ### With curses
 
 This version requires ```libncurses-dev```. Use your distros package manager to obtain it<br><br>
@@ -31,3 +25,9 @@ dnf install ncurses-devel
 make
 ```
 
+### Terminal <span style='color: red;'>NO LONGER UPDATING</span>
+
+on linux/macos/unix
+```bash
+make terminal
+```
