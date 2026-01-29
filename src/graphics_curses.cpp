@@ -17,7 +17,7 @@ using namespace std;
 
 unsigned int graphics::board_row = 1;
 unsigned int graphics::board_column = 0;
-unsigned int graphics::field_width = 9;
+unsigned int graphics::field_width = 7;
 unsigned int graphics::field_height = 3;
 
 void graphics::init(){
