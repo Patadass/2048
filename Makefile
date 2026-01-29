@@ -3,7 +3,7 @@ c_src = $(wildcard ./src/*curses.cpp)
 
 FLAGS = -lncurses
 
-all: terminal
+all: curses
 
 terminal:
 	$(CXX) -o 2048 $(t_src) ./src/util.cpp
