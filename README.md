@@ -2,9 +2,9 @@
 
 ![curses look](https://github.com/Patadass/2048/blob/main/photos/curses.png?raw=true)
 
-## Build
+# Build
 
-### With curses
+## With curses
 
 This version requires ```libncurses-dev```. Use your distros package manager to obtain it<br><br>
 
@@ -25,9 +25,10 @@ dnf install ncurses-devel
 make
 ```
 
-### Terminal <span style='color: red;'>NO LONGER UPDATING</span>
+## Terminal **(NO LONGER UPDATING)**
 
 on linux/macos/unix
 ```bash
 make terminal
 ```
+
