@@ -100,8 +100,7 @@ public:
         srand(time(nullptr)); //set seed from current time
         unsigned int i = random_int(BOARD_HEIGHT);
         unsigned int j = random_int(BOARD_WIDTH);
-        //TODO
-        //bad
+        //TODO: bad
         while(is_set(i, j)){
             i = random_int(BOARD_HEIGHT);
             j = random_int(BOARD_WIDTH);

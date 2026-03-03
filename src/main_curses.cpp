@@ -12,6 +12,7 @@ int main(){
         cout<<"os not supported"<<endl;
         return 0;
     }
+
     graphics::init();
     game_board gb;
     gb.set_random(2);
@@ -107,6 +108,7 @@ int main(){
             , "GAME OVER");
     refresh();
     getch();
+
     graphics::end();
     return 0;
 }
