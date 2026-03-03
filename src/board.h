@@ -129,6 +129,12 @@ public:
         return false;
     }
 
+    //check if there are any available moves
+    bool has_any_move(){
+        return has_move(-1, 0) || has_move(1, 0)
+            || has_move(0, 1) || has_move(0, -1);
+    }
+
     //check if board on pos i j can move in direction i + h, j + v
     bool can_move(unsigned int i, unsigned int j, short h, short v){
         if(is_ofb(i + h, j + v)){

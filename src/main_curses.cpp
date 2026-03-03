@@ -21,7 +21,7 @@ int main(){
     graphics::draw_score(gb);
 
     WINDOW* win = nullptr;
-    while(!gb.all_set()){
+    while(gb.has_any_move()){
         if(win != nullptr){
             refresh();
             logger::ushow_log();
@@ -95,10 +95,18 @@ int main(){
         }
 
         graphics::clear_screen();
-        gb.set_random(2);
+        if(!gb.all_set()){
+            gb.set_random(2);
+        }
         graphics::draw_board(gb);
         graphics::draw_score(gb);
     }
+    attron(COLOR_PAIR(7));
+    mvprintw(graphics::board_row + 3 + (graphics::field_height * 4)
+            , graphics::board_column - 5 + (graphics::field_width * 2)
+            , "GAME OVER");
+    refresh();
+    getch();
     graphics::end();
     return 0;
 }
