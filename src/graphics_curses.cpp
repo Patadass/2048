@@ -23,6 +23,7 @@ unsigned int graphics::field_height = 3;
 void graphics::init(){
     initscr();
     curs_set(0);
+    keypad(stdscr, TRUE);
     start_color();
     init_color(COLOR_BLACK, 0, 0, 0);
     init_pair(9, COLOR_BLACK, COLOR_BLACK);

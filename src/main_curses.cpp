@@ -29,21 +29,26 @@ int main(){
             wrefresh(win);
         }
         int s_dir = getch();
+        logger::write("%d %d", s_dir, KEY_LEFT);
 
         int dir;
         switch(s_dir){
+            case KEY_LEFT:
             case 'a':        
             case 'A':
                 dir = DIR_LEFT;
             break;
+            case KEY_RIGHT:
             case 'd':
             case 'D':
                 dir = DIR_RIGHT;
             break;
+            case KEY_DOWN:
             case 's':
             case 'S':
                 dir = DIR_DOWN;
             break;
+            case KEY_UP:
             case 'w':
             case 'W':
                 dir = DIR_UP;
