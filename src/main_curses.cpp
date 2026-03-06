@@ -8,10 +8,9 @@
 using namespace std;
 
 int main(){
-    if(PLATFORM == NULL){
-        cout<<"os not supported"<<endl;
-        return 0;
-    }
+#ifndef PLATFORM
+    return 0;
+#endif
 
     graphics::init();
     game_board gb;

@@ -26,10 +26,10 @@ int get_dir_from_string(string s){
 }
 
 int main(){
-    if(PLATFORM == NULL){
-        cout<<"os not supported"<<endl;
-        return 0;
-    }
+#ifndef PLATFORM
+    return 0;
+#endif
+
     game_board gb;
     gb.set_random(2);
     graphics::clear_screen();

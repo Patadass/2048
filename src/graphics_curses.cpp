@@ -41,9 +41,7 @@ void graphics::end(){
 }
 
 void graphics::set_field_width(unsigned int n){
-    if(n < 4 || n > 20){
-        n = graphics::field_width;
-    }else{
+    if(n >= 4 && n <= 20){
         if(n % 2 == 0){
             n++;
         }
@@ -56,17 +54,15 @@ void graphics::set_board_draw_pos(unsigned int row, unsigned int column){
     graphics::board_column = column;
 }
 
+#if defined(__linux__)
 void graphics::center_board(){
-    string platform = PLATFORM;
-    if(platform != "linux"){
-        return;
-    }
     struct winsize ws;
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &ws);
     int row = (ws.ws_row / 2) - (field_height * BOARD_HEIGHT) / 2;
     int column = (ws.ws_col / 2) - (field_width * BOARD_WIDTH) / 2;
     graphics::set_board_draw_pos(row, column);
 }
+#endif
 
 void graphics::set_cursor(unsigned int row, unsigned int column){
     move(row, column);
@@ -99,9 +95,11 @@ void graphics::cursor_back(unsigned int n = 1){
 }
 
 void graphics::draw_board(game_board board, bool center){
+#if defined(__linux__)
     if(center){
         center_board();
     }
+#endif
     set_cursor(board_row, board_column);
     for(size_t i = 0;i < BOARD_HEIGHT;i++){
         for(size_t j = 0;j < BOARD_WIDTH;j++){

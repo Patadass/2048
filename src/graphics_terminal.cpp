@@ -16,14 +16,12 @@ using namespace std;
 
 unsigned int graphics::board_row = 1;
 unsigned int graphics::board_column = 0;
-unsigned int graphics::field_width = 9;
+unsigned int graphics::field_width = 7;
 unsigned int graphics::field_height = 3;
 
 //set size of field
 void graphics::set_field_width(unsigned int n){
-    if(n < 4 || n > 20){
-        n = graphics::field_width;
-    }else{
+    if(n >= 4 && n <= 20){
         if(n % 2 == 0){
             n++;
         }
@@ -37,18 +35,16 @@ void graphics::set_board_draw_pos(unsigned int row, unsigned int column){
     graphics::board_column = column;
 }
 
+#if defined(__linux__)
 //center board to middle of screen
 void graphics::center_board(){
-    string platform = PLATFORM;
-    if(platform != "linux"){
-        return;
-    }
     struct winsize ws;
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &ws);
     int row = (ws.ws_row / 2) - (field_height * BOARD_HEIGHT) / 2;
     int column = (ws.ws_col / 2) - (field_width * BOARD_WIDTH) / 2;
     graphics::set_board_draw_pos(row, column);
 }
+#endif
 
 //TODO
 //check number of columns and rows before setting cursos
@@ -77,9 +73,11 @@ void graphics::cursor_back(unsigned int n = 1){
 }
 
 void graphics::draw_board(game_board board, bool center){
+#if defined(__linux__)
     if(center){
         center_board();
     }
+#endif
     set_cursor(board_row, board_column);
     for(size_t i = 0;i < BOARD_HEIGHT;i++){
         for(size_t j = 0;j < BOARD_WIDTH;j++){
@@ -164,13 +162,12 @@ string graphics::get_color(unsigned int n){
 }
 
 void graphics::clear_screen(){
-    string platform = PLATFORM;
-    if(platform == "linux" || platform == "apple"){
-        system("clear");
-    }
-    if(platform == "windows"){
-        system("cls");
-    }
+#if defined(__linux__) || defined(__APPLE__)
+    system("clear");
+#endif
+#if defined(__WIN32) || defined(__WIN64)
+    system("cls");
+#endif
 }
 
 

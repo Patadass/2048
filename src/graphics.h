@@ -14,8 +14,6 @@
     #define LINUX
 #elif defined(__APPLE__)
     #define PLATFORM "apple"
-#else
-    #define PLATFORM NULL
 #endif
 
 struct graphics{
