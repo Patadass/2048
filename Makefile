@@ -1,7 +1,7 @@
 t_src = $(wildcard ./src/*terminal.cpp)
 c_src = $(wildcard ./src/*curses.cpp)
 
-FLAGS = -lncurses
+FLAGS = -Wall -lncurses
 
 all: curses
 
