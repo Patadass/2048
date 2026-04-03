@@ -22,32 +22,32 @@ struct graphics{
     static unsigned int field_width;
     static unsigned int field_height;
 
-    static void init();
-    static void end();
-    static void set_board_draw_pos(unsigned int row, unsigned int column);
-    static void center_board();
-    static bool is_window_size_change();
-    static void set_field_width(unsigned int n);
-    static void set_cursor(unsigned int row, unsigned int column);
+    static void         init();
+    static void         end();
+    static void         set_board_draw_pos(unsigned int row, unsigned int column);
+    static void         center_board();
+    static bool         is_window_size_change();
+    static void         set_field_width(unsigned int n);
+    static void         set_cursor(unsigned int row, unsigned int column);
 
-    static void cursor_down(unsigned int n);
-    static void cursor_foward(unsigned int n);
-    static void cursor_back(unsigned int n);
-    static void cursor_up(unsigned int n);
+    static void         cursor_down(unsigned int n);
+    static void         cursor_foward(unsigned int n);
+    static void         cursor_back(unsigned int n);
+    static void         cursor_up(unsigned int n);
 
-    static void draw_board(game_board board, bool center=true);
-    static void draw_score(game_board board);
+    static void         draw_board(game_board board, bool center=true);
+    static void         draw_score(game_board board);
 
-    static std::string get_color(unsigned int n);
-    static int get_color_pair(unsigned int n);
+    static              std::string get_color(unsigned int n);
+    static int          get_color_pair(unsigned int n);
 
-    static void clear_screen();
+    static void         clear_screen();
     
     //for logger
     //returns WINDOW* if using curses and void if not
     struct WIN;
-    static void* create_window(int height, int widht, int starty,int startx, std::string title = "log");
-    static void destory_win(void* local_win);
-    static void print_on_window(void* window, std::ifstream* f);
+    static void*        create_window(int height, int widht, int starty,int startx, std::string title = "log");
+    static void         destory_win(void* local_win);
+    static void         print_on_window(void* window, std::ifstream* f);
 };
 #endif

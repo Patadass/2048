@@ -6,28 +6,28 @@
 #ifndef GAME_BOARD_H
 #define GAME_BOARD_H
 
-#define BOARD_HEIGHT 4
-#define BOARD_WIDTH 4
+#define BOARD_HEIGHT    4
+#define BOARD_WIDTH     4
 
-#define DIR_UP 0
-#define DIR_RIGHT 1
-#define DIR_DOWN 2
-#define DIR_LEFT 3
-#define DIR_LOG 4
-#define DIR_UNDEF 99
+#define DIR_UP          0
+#define DIR_RIGHT       1
+#define DIR_DOWN        2
+#define DIR_LEFT        3
+#define DIR_LOG         4
+#define DIR_UNDEF       99
 
 const short directions[4][2] = {
-        {-1, 0},
-        {0, 1},
-        {1, 0},
-        {0, -1}
+        {-1,  0},
+        { 0,  1},
+        { 1,  0},
+        { 0, -1}
 };
 
 struct game_board{
 private:
-    unsigned int board[BOARD_HEIGHT][BOARD_WIDTH];
-    int _largest;
-    int _score;
+    unsigned int    board[BOARD_HEIGHT][BOARD_WIDTH];
+    int             _largest;
+    int             _score;
 
 public:
     game_board(){
