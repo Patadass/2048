@@ -7,24 +7,18 @@ CXXFLAGS = -Wall -lncurses
 all: curses
 
 terminal:
-	$(CXX) -o 2048 $(t_src) 
+	$(CXX) -o 2048 $(T_SRC) 
 
 curses:
-	$(CXX) -o 2048 $(c_src) $(FLAGS)
+	$(CXX) -o 2048 $(CXX_SRC) $(CXXFLAGS)
 
 static:
-	$(CXX) -static $(c_src) -o 2048s $(FLAGS) -ltinfo
+	$(CXX) -static $(CXX_SRC) -o 2048s $(CXXFLAGS) -ltinfo
 
 objects: $(OBJS)
 	$(CXX) -o 2048 $(OBJS) $(CXXFLAGS)
 
-./src/graphics_curses.o: ./src/graphics_curses.cpp
-	$(CXX) -c $< -o $@ $(CXXFLAGS)
-
-./src/main_curses.o: ./src/main_curses.cpp
-	$(CXX) -c $< -o $@ $(CXXFLAGS)
-
-./src/util.o: ./src/util.cpp
+./src/%.o: ./src/%.cpp
 	$(CXX) -c $< -o $@ $(CXXFLAGS)
 
 clean:
