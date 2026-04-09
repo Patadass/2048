@@ -1,5 +1,5 @@
 2048
 2048s
 log
-./src/*.o
-./src/*.ghc
+src/*.o
+src/*.gch
